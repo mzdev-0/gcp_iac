@@ -1,9 +1,6 @@
 # modules/gke/variables.tf
 
-variable "project_id" {
-  type        = string
-  description = "GCP Project ID"
-}
+
 
 variable "cluster_name" {
   type        = string
@@ -17,10 +14,7 @@ variable "cluster_location" {
   default     = "us-central1"
 }
 
-variable "network_name" {
-  type        = string
-  description = "Name of the VPC network for the cluster"
-}
+
 
 variable "subnetwork_name" {
   type        = string

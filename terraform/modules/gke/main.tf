@@ -3,8 +3,8 @@
 resource "gke-cluster" "default-cluster" {
   name                   = var.cluster_name
   location               = var.cluster_location
-  project                = var.project_id
-  network                = var.network_name
+  project                = module.network.project_id
+  network                = module.network.network_name
   subnetwork             = var.subnetwork_name
   deletion_protection    = var.deletion_protection
   enable_private_nodes   = var.enable_private_nodes
@@ -30,7 +30,7 @@ resource "gke-cluster" "default-cluster" {
   }
 
   workload_identity_config {
-    identity_namespace = "${var.project_id}.svc.id.goog"
+    identity_namespace = "${module.network.project_id}.svc.id.goog"
   }
 
   addons_config {
