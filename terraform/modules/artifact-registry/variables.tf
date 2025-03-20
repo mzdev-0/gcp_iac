@@ -1,4 +1,8 @@
 
+variable "project_id" {
+  type        = string
+  description = "The project ID"
+}
 
 variable "repository_id" {
   type        = string
@@ -23,3 +27,4 @@ variable "format" {
   description = "The format of packages that will be stored in the repository. Supported formats are: DOCKER, MAVEN, NPM, PYTHON, APT, YUM."
   default     = "DOCKER"
 }
+
