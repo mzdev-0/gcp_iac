@@ -1,19 +1,10 @@
 # node-pool/variables.tf
 
-variable "project_id" {
-  type        = string
-  description = "The GCP project ID."
-}
 
-variable "location" {
-  type        = string
-  description = "The GCP location (region or zone) for the node pool."
-}
 
-variable "cluster_name" {
-  type        = string
-  description = "The name of the GKE cluster to associate the node pool with."
-}
+
+
+
 
 variable "node_pool_name" {
   type        = string

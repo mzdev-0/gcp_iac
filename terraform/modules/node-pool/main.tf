@@ -1,10 +1,10 @@
 # node_pool/main.tf
 
 resource "google_container_cluster_node_pool" "default" {
-  project    = var.project_id
+  project    = module.network.project_id
   name       = var.node_pool_name
-  location   = var.location # Assuming location is passed from the main cluster module
-  cluster    = var.cluster_name # Pass cluster name to associate with correct cluster
+  location   = module.gke.cluster_location
+  cluster    = module.gke.cluster_name
   node_count = var.initial_node_count
 
   node_config {
