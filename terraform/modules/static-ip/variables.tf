@@ -1,3 +1,7 @@
+variable "project_id" {
+  type        = string
+  description = "The project ID"
+}
 variable "name" {
   type        = string
   description = "The name of the static IP address."
