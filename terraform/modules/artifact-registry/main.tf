@@ -1,5 +1,5 @@
 resource "google_artifact_registry_repository" "default-registry" {
-  project      = var.project_id
+  project      = module.network.project_id
   repository_id = var.repository_id
   location      = var.location
   description   = var.description
