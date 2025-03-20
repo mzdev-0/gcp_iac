@@ -1,7 +1,4 @@
-variable "project_id" {
-  type        = string
-  description = "The ID of the project in which to manage IAM."
-}
+
 
 variable "service_account_id" {
   type        = string
