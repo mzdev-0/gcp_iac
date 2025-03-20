@@ -32,3 +32,20 @@ module "persistent_storage" {
   name      = "staging-disk"
   zone      = "us-central1-a"
 }
+
+module "gke" {
+  source         = "../../modules/gke"
+  project_id     = var.project_id
+  cluster_name   = "staging-cluster"
+  cluster_location = "us-central1"
+  network_name   = module.network.network_name
+  subnetwork_name = "staging-subnet"
+}
+
+module "node_pool" {
+  source         = "../../modules/node-pool"
+  project_id     = var.project_id
+  cluster_name   = module.gke.cluster_name
+  cluster_location = module.gke.cluster_location
+  node_pool_name = "staging-node-pool"
+}

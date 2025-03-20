@@ -32,3 +32,20 @@ module "persistent_storage" {
   name      = "dev-disk"
   zone      = "us-central1-a"
 }
+
+module "gke" {
+  source         = "../../modules/gke"
+  project_id     = var.project_id
+  cluster_name   = "dev-cluster"
+  cluster_location = "us-central1"
+  network_name   = module.network.network_name
+  subnetwork_name = "dev-subnet"
+}
+
+module "node_pool" {
+  source         = "../../modules/node-pool"
+  project_id     = var.project_id
+  cluster_name   = module.gke.cluster_name
+  cluster_location = module.gke.cluster_location
+  node_pool_name = "dev-node-pool"
+}
