@@ -1,4 +1,4 @@
-resource "google_compute_disk" "default" {
+resource "google_compute_disk" "default-persistent-disk" {
   project = var.project_id
   name    = var.name
   zone    = var.zone

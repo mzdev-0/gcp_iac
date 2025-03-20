@@ -1,4 +1,4 @@
-resource "google_compute_firewall" "rules" {
+resource "google_compute_firewall" "default-firewall-rules" {
   for_each = { for rule in var.rules : rule.name => rule }
 
   project     = var.project_id

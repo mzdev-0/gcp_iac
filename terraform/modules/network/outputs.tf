@@ -1,11 +1,11 @@
 output "network_name" {
   description = "The name of the network."
-  value       = google_compute_network.default.name
+  value       = google_compute_network.default-network.name
 }
 
 output "network_id" {
   description = "The ID of the network."
-  value       = google_compute_network.default.id
+  value       = google_compute_network.default-network.id
 }
 
 output "subnets" {
