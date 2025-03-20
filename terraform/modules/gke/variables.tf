@@ -1,70 +1,119 @@
+# modules/gke/variables.tf
+
 variable "project_id" {
   type        = string
-  description = "The GCP project ID to deploy the GKE cluster in."
-}
-
-variable "region" {
-  type        = string
-  description = "The GCP region to deploy the GKE cluster in."
-  default     = "us-central1"
+  description = "GCP Project ID"
 }
 
 variable "cluster_name" {
   type        = string
-  description = "The name of the GKE cluster."
-  default     = "default-gke-cluster"
+  description = "Name of the GKE cluster"
+  default     = "gke-cluster"
 }
 
-variable "node_pool_name" {
+variable "cluster_location" {
   type        = string
-  description = "The name of the default node pool."
-  default     = "default-pool"
+  description = "Location for the GKE cluster (region or zone)"
+  default     = "us-central1"
 }
 
-variable "initial_node_count" {
-  type        = number
-  description = "The initial number of nodes in the default node pool."
-  default     = 1
-}
-
-variable "machine_type" {
+variable "network_name" {
   type        = string
-  description = "The machine type for nodes in the default node pool."
-  default     = "e2-medium"
+  description = "Name of the VPC network for the cluster"
 }
 
-variable "min_nodes" {
-  type        = number
-  description = "Minimum number of nodes for autoscaling in the default node pool."
-  default     = 1
-}
-
-variable "max_nodes" {
-  type        = number
-  description = "Maximum number of nodes for autoscaling in the default node pool."
-  default     = 3
-}
-
-variable "location" {
+variable "subnetwork_name" {
   type        = string
-  description = "The location type for the cluster (region or zone)."
-  default     = "REGION" # Can be REGION or ZONE. For regional clusters, use REGION.
+  description = "Name of the subnetwork for the cluster"
 }
 
-variable "network" {
+variable "release_channel" {
   type        = string
-  description = "The name of the VPC network to use for the cluster. Defaults to 'default'."
-  default     = "default-network"
-}
-
-variable "subnetwork" {
-  type        = string
-  description = "The name of the VPC subnet to use for the cluster. Defaults to 'default'."
-  default     = "default-subnet"
+  description = "GKE Release channel for the cluster (e.g., RAPID, REGULAR, STABLE, UNSPECIFIED)"
+  default     = "REGULAR"
 }
 
 variable "deletion_protection" {
   type        = bool
-  description = "Enable deletion protection for the GKE cluster."
-  default     = true # Recommended for production
+  description = "Whether cluster deletion protection is enabled"
+  default     = true
+}
+
+variable "enable_private_nodes" {
+  type        = bool
+  description = "Enable private nodes for the cluster"
+  default     = true
+}
+
+variable "master_ipv4_cidr_block" {
+  type        = string
+  description = "The CIDR block to use for the cluster master's internal IP. Only used if enable_private_nodes is true."
+  default     = "172.16.0.0/28" # Example private IP range
+}
+
+variable "enable_private_endpoint" {
+  type        = bool
+  description = "Enable private endpoint for master access. Only used if enable_private_nodes is true."
+  default     = true
+}
+
+variable "enable_public_endpoint" {
+  type        = bool
+  description = "Enable public endpoint for master access. Only used if enable_private_nodes is true."
+  default     = false
+}
+
+variable "master_username" {
+  type        = string
+  description = "Username for basic authentication to the cluster master (not recommended for production)"
+  default     = "admin"
+}
+
+variable "master_password" {
+  type        = string
+  description = "Password for basic authentication to the cluster master (not recommended for production)"
+  default     = "password"
+  sensitive   = true # Mark as sensitive
+}
+
+variable "disable_http_load_balancing" {
+  type        = bool
+  description = "Disable HTTP load balancing addon"
+  default     = false
+}
+
+variable "disable_horizontal_pod_autoscaling" {
+  type        = bool
+  description = "Disable Horizontal Pod Autoscaling addon"
+  default     = false
+}
+
+variable "disable_kubernetes_dashboard" {
+  type        = bool
+  description = "Disable Kubernetes Dashboard addon"
+  default     = true # Disabled by default for security reasons
+}
+
+variable "disable_network_policy" {
+  type        = bool
+  description = "Disable Network Policy addon"
+  default     = false
+}
+
+variable "enable_vertical_pod_autoscaling" {
+  type        = bool
+  description = "Enable Vertical Pod Autoscaling"
+  default     = false
+}
+
+variable "logging_enabled_components" {
+  type        = list(string)
+  description = "List of components logging to Cloud Logging (SYSTEM_COMPONENTS, WORKLOADS)"
+  default     = ["SYSTEM_COMPONENTS", "WORKLOADS"]
+}
+
+variable "monitoring_enabled_components" {
+  type        = list(string)
+  description = "List of components monitoring to Cloud Monitoring (SYSTEM_COMPONENTS, WORKLOADS)"
+  default     = ["SYSTEM_COMPONENTS", "WORKLOADS"]
 }
