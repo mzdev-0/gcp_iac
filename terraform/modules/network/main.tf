@@ -4,7 +4,7 @@ resource "google_compute_network" "default-network" {
   auto_create_subnetworks = false
 }
 
-resource "google_compute_subnetwork" "default" {
+resource "google_compute_subnetwork" "default-subnet" {
   for_each = { for subnet in var.subnets : subnet.name => subnet }
 
   project       = var.project_id
@@ -21,3 +21,4 @@ resource "google_compute_subnetwork" "default" {
     }
   }
 }
+
