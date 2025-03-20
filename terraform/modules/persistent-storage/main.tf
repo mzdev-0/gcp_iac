@@ -3,5 +3,6 @@ resource "google_compute_disk" "default-persistent-disk" {
   name    = var.name
   zone    = var.zone
   type    = var.type
-  size_gb = var.size_gb
+  size    = var.size_gb
 }
+
