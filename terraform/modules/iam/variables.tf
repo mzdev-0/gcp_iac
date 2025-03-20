@@ -1,3 +1,7 @@
+variable "project_id" {
+  type        = string
+  description = "The project ID"
+}
 
 
 variable "service_account_id" {
@@ -17,3 +21,4 @@ variable "roles" {
   description = "A list of IAM roles to assign to the service account."
   default     = []
 }
+
