@@ -1,3 +1,7 @@
+variable "project_id" {
+  type        = string
+  description = "the Project ID"
+}
 
 
 variable "name" {
@@ -23,3 +27,4 @@ variable "size_gb" {
   description = "The size of the persistent disk in GB."
   default     = 10
 }
+
